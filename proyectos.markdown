@@ -4,7 +4,7 @@ title: Proyectos
 permalink: proyectos.html
 ---
 
-Sequi-app: 
+SequiApp: 
 - [leaflet-test](sequiapp/leaflet_test.html)
 - [folium-test](sequiapp/emerg_rindes_18.html)
 
