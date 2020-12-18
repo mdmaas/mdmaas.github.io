@@ -6,6 +6,10 @@ categories: jekyll update
 ---
 [Implemented](https://varunagrawal.github.io/2018/03/27/latex-jekyll/)
 
+Here, have some $$\pi$$.
 
+Let's solve equation
+
+$$ \Delta u = f $$
 
 
