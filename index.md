@@ -4,7 +4,6 @@
 
 layout: page
 title: Home
-order: 1
 ---
 
 <img src="images/face2020.jpeg" width=100 height=auto align=center style="float:left; margin-right: 16px;">
