@@ -2,7 +2,7 @@
 layout: post
 title:  "Borde de una triangulación"
 date:   2020-12-16 00:30:43 -0500
-categories: jekyll update
+categories: math
 ---
 Como le decía a mi amigo user89 en mi primer [respuesta aceptada](https://stackoverflow.com/questions/59419537/how-do-i-get-the-boundary-of-a-delaunay-triangulation/65315724#65315724) 
 en Stackoverflow, es muy fácil encontrar el borde de una triangulación. 
