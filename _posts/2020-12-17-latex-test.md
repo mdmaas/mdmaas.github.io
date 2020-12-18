@@ -5,12 +5,11 @@ date:   2020-12-17 00:30:43 -0500
 categories: math
 usemathjax: true
 ---
-[Implemented](https://alan97.github.io/random/mathjax/)
+Esto es una nota sobre cómo incorporar Latex en un blog de Jekyll, siguiendo 
+las [instrucciones](https://alan97.github.io/random/mathjax/).
 
-Here, have some $$\pi$$.
+Hola $$\pi$$.
 
-Let's solve equation
+Ahora resolvamos la ecuación de Helmholtz
 
-$$ \Delta u = f $$
-
-
+$$ \Delta u + k^2 u = f $$
