@@ -1,4 +1,0 @@
-I"�<p>Como le decía a mi amigo user89 en mi primer <a href="https://stackoverflow.com/questions/59419537/how-do-i-get-the-boundary-of-a-delaunay-triangulation/65315724#65315724">respuesta aceptada</a> 
-en Stackoverflow, es muy fácil encontrar el borde de una triangulación. 
-La observación clave es que un lado de un triángulo está en el borde si no es compartido por ningún otro triángulo.</p>
-:ET
