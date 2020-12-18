@@ -6,8 +6,6 @@ layout: page
 title: Home
 ---
 
-## Posición Actual
-
 <img src="images/face2020.jpeg" width=100 height=auto align=center style="float:left; margin-right: 16px;">
 <p><b>Jefe de Trabajos Prácticos</b> -- Departamento de Matemática de Exactas-UBA</p>
 <p> <b>Investigador Asistente </b> -- CONICET </p>
