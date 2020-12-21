@@ -18,7 +18,7 @@
 		/* Leaflet */
 		#mapid { 
 			height: 800px; 
-			width: 1000px;
+			width: 100%;
 			margin: auto;
 			}
 		
@@ -70,18 +70,18 @@
 		  padding: 10px;
 		}
 
-		/* Left and right column */
-		.column.side {
+		/* Left column */
+		.column.left {
 		   -webkit-flex: 1;
 		   -ms-flex: 1;
 		   flex: 1;
 		}
 
-		/* Middle column */
-		.column.middle {
-		  -webkit-flex: 2;
-		  -ms-flex: 2;
-		  flex: 2;
+		/* Right column */
+		.column.right {
+		  -webkit-flex: 1;
+		  -ms-flex: 1;
+		  flex: 1;
 		}
 
 		/* Style the footer */
@@ -100,27 +100,52 @@
 		}
 		
 		
-		.vertical-menu {
-		  width: 100%; /* Set a width if you like */
+		/* Dropdown Button */
+		.dropbtn {
+		  background-color: #4CAF50;
+		  color: white;
+		  padding: 16px;
+		  font-size: 16px;
+		  border: none;
 		}
 
-		.vertical-menu a {
-		  background-color: #eee; /* Grey background color */
-		  color: black; /* Black text color */
-		  display: block; /* Make the links appear below each other */
-		  padding: 12px; /* Add some padding */
-		  text-decoration: none; /* Remove underline from links */
+		/* The container <div> - needed to position the dropdown content */
+		.dropdown {
+		  position: relative;
+		  display: inline-block;
 		}
 
-		.vertical-menu a:hover {
-		  background-color: #ccc; /* Dark grey background on mouse-over */
+		/* Dropdown Content (Hidden by Default) */
+		.dropdown-content {
+		  display: none;
+		  position: absolute;
+		  background-color: #f1f1f1;
+		  min-width: 160px;
+		  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+		  z-index: 1;
 		}
 
-		.vertical-menu a.active {
+		/* Links inside the dropdown */
+		.dropdown-content a {
+		  color: black;
+		  padding: 12px 16px;
+		  text-decoration: none;
+		  display: block;
+		}
+		
+		.dropdown-content a.active {
 		  background-color: #4CAF50; /* Add a green color to the "active/current" link */
 		  color: white;
 		}
-		
+
+		/* Change color of dropdown links on hover */
+		.dropdown-content a:hover {background-color: #ddd;}
+
+		/* Show the dropdown menu on hover */
+		.dropdown:hover .dropdown-content {display: block;}
+
+		/* Change the background color of the dropdown button when the dropdown content is shown */
+		.dropdown:hover .dropbtn {background-color: #3e8e41;}
 	</style>
 	
 
@@ -128,50 +153,51 @@
 <body>
 
 	<div class="header">
-	  <h1>SequiApp</h1>
+		
+		<center>
+		<h1>SequiApp</h1>
+		</center>		
+		
+
 	</div>
 
 	<div class="row">
-	  
-	  <div class="column side">	 
-		 <h3 align=center>Datos</h3>
-		 
-		<div class="vertical-menu" id="setDataMenu">
-		  <a href="#" id="selRain" class="active" onclick="setActiveData(1)">Anomalías de Lluvia</a>
-		  <a href="#" id="selMoisture" onclick="setActiveData(2)">Anomalías de Humedad</a>
-		  <a href="#" id="selNDVI" onclick="setActiveData(3)">Anomalías de Vegetación</a>
-		  <a href="#" id="selCombined" onclick="setActiveData(4)">Índice de Sequía Combinado</a>
-		</div>
-		 
-		 
-		 <center>
-			 <h3>Fecha</h3>
-			 <input type="month" id="seldate" name="seldate" 
-		    min="2000-01" value="2019-03">
-		 </center>	
-		 
-		 <h3 align=center>Pérdidas de rindes</h3>
-		 
-	  </div>
-	  
-	  <div class="column middle">
+		
+	  <div class="column left">
 		 <div id="mapid"></div>
 		 
-		 <center>
-		 <h2>Datos históricos</h2>
-		 <canvas id="timeSeriesChart" height="100px"></canvas>
-		 </center>
 	  </div>
 	  
-	  <div class="column side">
-		<h2>Rightmenu</h2>
+	  <div class="column right">	 
+		
+		<center>
+		
+		<div class="dropdown">
+		  <button class="dropbtn">Datos</button>
+		  <div class="dropdown-content" id="setDataMenu">
+			<a href="#" id="selRain" class="active" onclick="setActiveData(1)">Anomalías de Lluvia</a>
+			<a href="#" id="selMoisture" onclick="setActiveData(2)">Anomalías de Humedad</a>
+			<a href="#" id="selNDVI" onclick="setActiveData(3)">Anomalías de Vegetación</a>
+			<a href="#" id="selCombined" onclick="setActiveData(4)">Índice de Sequía Combinado</a>
+		  </div>
+		</div>
+		 
+		 <input type="month" id="seldate" name="seldate" 
+		  min="2000-01" value="2019-03">
+		  		  
+		 <h2>Datos históricos</h2>
+		 <canvas id="timeSeriesChart" width="100%"></canvas>
+		 </center>
+		  
+		 
 	  </div>
+	  
 	</div>
 	
 
 
 	<div class="footer">
-	  <p>Mantenido por <a href="https://mascondosa.github.io/">Martín Maas</a>. Hosted by GitHub.com </p>
+	  <p>Desarrollado por <a href="https://mascondosa.github.io/">Martín Maas</a>. Hosted by GitHub.com </p>
 	</div>
 
 	<script>
