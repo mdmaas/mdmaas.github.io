@@ -4,8 +4,8 @@ title: Proyectos
 permalink: proyectos.html
 ---
 
-Visualización de datos satelitales: 
-- [leaflet-test](sequiapp/leaflet_test.html)
+Machine learning y visualización de datos satelitales: 
+- [SequiApp](sequiapp/main.html): información sobre sequías a escala departamental.
 - [folium-test](sequiapp/emerg_rindes_18.html)
 
 Métodos Numéricos:
