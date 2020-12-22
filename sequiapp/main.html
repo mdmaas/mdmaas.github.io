@@ -13,6 +13,13 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 	
 	<script type="text/javascript" src="Deptos_light.json"></script>
+    
+    <script>
+    var Ene18 = {
+	  "82042" : -0.25,
+	  "14063" : 0.2
+	};	
+    </script>
 	
 	<style>
 		/* Leaflet */
@@ -185,7 +192,6 @@
 		 <input type="month" id="seldate" name="seldate" 
 		  min="2000-01" value="2019-03">
 		  		  
-		 <h2>Datos históricos</h2>
 		 <canvas id="timeSeriesChart" width="100%"></canvas>
 		 </center>
 		  
@@ -201,7 +207,8 @@
 	</div>
 
 	<script>
-		var seldata = "Anomalías de Lluvia"
+		var selData = "Anomalías de Lluvia"
+        var selDept = "Seleccione un departamento";
 		
 		function setActiveData(a){
 			var menu = document.getElementById("setDataMenu");
@@ -209,27 +216,28 @@
 			current[0].className = ""
 			switch (arguments[0]) {
 				case 1:
-					seldata = "Anomalía de Lluvia";
+					selData = "Anomalía de Lluvia";
 					document.getElementById("selRain").className = "active";
 					break;
 				
 				case 2:
-					seldata = "Anomalía de Humedad";
+					selData = "Anomalía de Humedad";
 					document.getElementById("selMoisture").className = "active";
 					break;
 				
 				case 3:
-					seldata = "Anomalía de Vegetación";
+					selData = "Anomalía de Vegetación";
 					document.getElementById("selNDVI").className = "active";
 					break;
 								
 				case 4:
-					seldata = "Índice Combinado";
+					selData = "Índice Combinado";
 					document.getElementById("selCombined").className = "active";
 					break;
 			}
 				
 			info.update();
+            updateConfigByMutating(mychart);
 		}
 	</script>	
 		
@@ -243,21 +251,30 @@
                     preferCanvas: false,
                 }
 	);
+    
+    L.tileLayer('http://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/capabaseargenmap@EPSG:3857@png/{z}/{x}/{-y}.png', {
+        opacity: 1.0,
+        attribution: "Mapabase del \u003ca href=\"http://www.ign.gob.ar\"\u003eInstituto Geografico Nacional\u003c/a\u003e",
+        minZoom: 1,
+        maxZoom: 28,
+        minNativeZoom: 0,
+        maxNativeZoom: 18
+    }).addTo(mymap);
 	
 	function getColor(d) {
-		return d > 100 ? '#800026' :
-			   d > 50  ? '#BD0026' :
-			   d > 20  ? '#E31A1C' :
-			   d > 10  ? '#FC4E2A' :
-			   d > 5   ? '#FD8D3C' :
-			   d > 2   ? '#FEB24C' :
-			   d > -1   ? '#FED976' :
+		return d > 0 ? '#800026' :
+			   d > -0.05  ? '#BD0026' :
+			   d > -0.1  ? '#E31A1C' :
+			   d > -0.15  ? '#FC4E2A' :
+			   d > -0.2   ? '#FD8D3C' :
+			   d > -0.25   ? '#FEB24C' :
+			   d > -0.3   ? '#FED976' :
 						  '#FFEDA0';
 	}
 	
 	function style(feature) {
 		return {
-			fillColor: getColor(feature.properties.in1),
+			fillColor: getColor( getDensity(feature.properties.in1) ),
 			weight: 2,
 			opacity: 1,
 			color: 'white',
@@ -265,12 +282,7 @@
 			fillOpacity: 0.7
 		};
 	}	
-	
-	L.tileLayer(
-                "https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg",
-                {"attribution": "Map tiles by \u003ca href=\"http://stamen.com\"\u003eStamen Design\u003c/a\u003e, under \u003ca href=\"http://creativecommons.org/licenses/by/3.0\"\u003eCC BY 3.0\u003c/a\u003e. Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://creativecommons.org/licenses/by-sa/3.0\"\u003eCC BY SA\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 5, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
-            ).addTo(mymap)
-    
+	    
     // Custom Info Control
             
 	var info = L.control();
@@ -282,8 +294,8 @@
 	};
 
 	info.update = function (props) {
-		this._div.innerHTML = '<h4>' + seldata + '</h4>' +  (props ?
-			'<b>' + props.nam + '</b><br />'
+		this._div.innerHTML = '<h4>' + selData + '</h4>' +  (props ?
+			'<b>' + props.nam + ': ' + getDensity(props.in1) + '</b><br />'
 			: 'Seleccione Departamento');
 	};
 
@@ -296,14 +308,14 @@
 	legend.onAdd = function (map) {
 
 		var div = L.DomUtil.create('div', 'info legend'),
-			grades = [0, 1, 2, 5, 10, 20, 50, 100],
+			grades = [0, -0.05, -0.1, -0.15, -0.2, -0.25, -0.3],
 			labels = [];
 
 		// loop through our density intervals and generate a label with a colored square for each interval
 		for (var i = 0; i < grades.length; i++) {
 			div.innerHTML +=
-				'<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-				grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+				'<i style="background:' + getColor(grades[i] + 0.001) + '"></i> ' +
+				grades[i]*100 + (grades[i + 1] ? '% &ndash;' + grades[i + 1]*100 + '%<br>' : '+');
 		}
 
 		return div;
@@ -337,13 +349,19 @@
 	function zoomToFeature(e) {
 		mymap.fitBounds(e.target.getBounds());
 	}
+	
+	function selectDepartment(e) {
+		selDept = e.target.properties.nam;
+		updateConfigByMutating(mychart);
+	}
 
             
 	function onEachFeature(feature, layer) {
+		layer.properties = feature.properties;
 		layer.on({
 			mouseover: highlightFeature,
 			mouseout: resetHighlight,
-			click: zoomToFeature
+			click: selectDepartment
 		});
 	}          
 	
@@ -352,11 +370,17 @@
 		style: style,
 		onEachFeature: onEachFeature
 		}).addTo(mymap);
-	
-	//~ var Ene18 = {
-	  //~ "65005" : { "imerg": -0.25, "smapl3": -0.33, "ndvi": -0.24 },
-	  //~ "65006" : { "imerg": -0.78, "smapl3": 0.21, "ndvi": 0.33 }
-	//~ };	
+    
+    function getDensity ( in1 ){
+        value = Ene18[in1];
+        if (typeof value !== 'undefined') {
+            return value;
+        } else {
+            return 0;
+        }
+        
+    };
+    
 	</script>
 	
 	
@@ -370,18 +394,30 @@
 	  labels.push(date.toString());
 	}
 
-	const chart = new Chart(ctx, {
+	var mychart = new Chart(ctx, {
 	  type: 'line',
 	  data: {
 		labels,
 		datasets: [{
-		  label: '# of Votes',
+		  label: selData,
 		  data: [12, 19, 3, 5, 2, 3],
 		  borderWidth: 1
 		}]
 	  },
-	  options: {}
+	  options: {
+          title: {
+              display: true,
+              text: selDept
+              }
+	  }
 	});
+	
+	function updateConfigByMutating(chart) {
+		chart.options.title.text = selDept;
+        chart.data.datasets[0].data = [50, 20, 12,59,42];
+        chart.data.datasets[0].label = selData;
+		chart.update();
+	};
 	</script>
 	
 
