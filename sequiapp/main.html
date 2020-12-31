@@ -1,6 +1,7 @@
-<!DOCTYPE html>
 <html>
 <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
 	integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
 	crossorigin=""/>
@@ -18,12 +19,13 @@
 	<script src="jquery.csv.js"></script>
 	
 	<script>
+		var dept_id = '6147'
 		var dept_ids = [];
 		var dates = [];
 		var anom_data = [];
 		var map_data = [];
 		var timeseries_data = [];
-		var selData = "Anomalías de Lluvia (IMERG)";
+		var selData = "Anomalías de NDVI";
 		var selDept = "Carlos Casares";		
 	</script>    
 	
@@ -200,7 +202,7 @@
 		  </div>
 		</div>
 
-		 <input type="month" onchange="changeDate(this.value);" id="seldate" name="seldate" min="2000-01" value="2018-02">
+		 <input type="month" onchange="changeDate(this.value);" id="seldate" name="seldate" min="2005-01" max="2020-12" value="2018-02">
 		  		  
 		 <canvas id="timeSeriesChart" width="100%"></canvas>
 		 </center>
@@ -264,14 +266,17 @@
 
 		function loadTimeSeries(dept_id){
 			ind = dept_ids.indexOf(dept_id.toString());
-			timeseries_data = anom_data[ind+1].slice(2,-1);
+			for (i = 0; i < DateLabels.length; i++) {
+				index_date = dates.indexOf(DateLabels[i]);
+				timeseries_data[i] = anom_data[ind+1][index_date+2];
+			}
 			updateConfigByMutating(mychart);
 		};
 
 		function loadMapData(date){
 			ind = dates.indexOf(date);
 			for (i = 1; i < anom_data.length; i++) {
-			  map_data[i-1] = anom_data[i][ind];
+			  map_data[i-1] = anom_data[i][ind+2];
 			}
 			geojson.resetStyle();	
 		};
@@ -279,6 +284,7 @@
 		function changeDate( newDate ){
 			loadMapData(newDate); 
 			setDateLabels();
+			loadTimeSeries(dept_id);
 			updateConfigByMutating(mychart);
 		}
 		
@@ -468,11 +474,11 @@
 		var selDateStr = document.getElementById('seldate').value;
 		var selYear = selDateStr.substring(0,4)
 		var selMonth = selDateStr.substring(5,7)
-		var startDate = new Date(selYear,selMonth,1);
+		var startDate = new Date(selYear,selMonth,0)
+		startDate = moment(startDate).subtract(6, 'months');
 		DateLabels = [];
-		
-		for (let i = 0; i < 12; i++) {
-		  const date = moment(startDate).add(i, 'months').format('YYYY-MM-DD');
+		for (i = 0; i < 12; i++) {
+		  date = moment(startDate).add(i, 'months').format('YYYY-MM');
 		  DateLabels.push(date.toString());
 		}
 		
