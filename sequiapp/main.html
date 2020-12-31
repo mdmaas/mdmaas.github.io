@@ -14,7 +14,7 @@
 	
 	<script type="text/javascript" src="Deptos_light.json"></script>
     
-	<script src="http://code.jquery.com/jquery-3.3.1.slim.js" integrity="sha256-fNXJFIlca05BIO2Y5zh1xrShK3ME+/lYZ0j+ChxX2DA=" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="jquery.csv.js"></script>
 	
 	<script>
@@ -233,11 +233,14 @@
 		}
 
 		function loadData(fname) {
-		  var xhttp = new XMLHttpRequest();
-		  xhttp.onreadystatechange = function() {
-			  if (this.readyState == 4 && this.status == 200) {
+			
+			csvData = $.ajax({
+				type: "GET",
+				url: "https://mascondosa.github.io/sequiapp/data/" + fname,
+				dataType: "text",
+				success: function (result) {
 				  // Parse CSV, dates and dept_ids
-				  anom_data = $.csv.toArrays(this.responseText);
+				  anom_data = $.csv.toArrays(result);
 				  dates = anom_data[0].slice(2,-1);
 				  for (i = 1; i < anom_data.length; i++) {
 					  dept_ids[i-1] = anom_data[i][1];
@@ -248,10 +251,15 @@
 				  dateStr = document.getElementById('seldate').value;
 				  loadMapData(dateStr);
 				  info.update();
-			  }};
-		  
-		  xhttp.open("GET", "data/" + fname, true);
-		  xhttp.send();
+				 },	
+				error: function (request, status, error) {
+					alert(request.responseText);
+					alert(status);
+					alert(error);
+				}				 			 
+			});
+			
+ 
 		};
 
 		function loadTimeSeries(dept_id){
