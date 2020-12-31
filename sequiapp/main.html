@@ -14,12 +14,18 @@
 	
 	<script type="text/javascript" src="Deptos_light.json"></script>
     
-    <script>
-    var Ene18 = {
-	  "82042" : -0.25,
-	  "14063" : 0.2
-	};	
-    </script>
+	<script src="http://code.jquery.com/jquery-3.3.1.slim.js" integrity="sha256-fNXJFIlca05BIO2Y5zh1xrShK3ME+/lYZ0j+ChxX2DA=" crossorigin="anonymous"></script>
+	<script src="jquery.csv.js"></script>
+	
+	<script>
+		var dept_ids = [];
+		var dates = [];
+		var anom_data = [];
+		var map_data = [];
+		var timeseries_data = [];
+		var selData = "Anomalías de Lluvia (IMERG)";
+		var selDept = "Carlos Casares";		
+	</script>    
 	
 	<style>
 		/* Leaflet */
@@ -180,17 +186,21 @@
 		<center>
 		
 		<div class="dropdown">
-		  <button class="dropbtn">Datos</button>
+		  <button class="dropbtn">Seleccione Anomalía</button>
 		  <div class="dropdown-content" id="setDataMenu">
-			<a href="#" id="selRain" class="active" onclick="setActiveData(1)">Anomalías de Lluvia</a>
-			<a href="#" id="selMoisture" onclick="setActiveData(2)">Anomalías de Humedad</a>
-			<a href="#" id="selNDVI" onclick="setActiveData(3)">Anomalías de Vegetación</a>
-			<a href="#" id="selCombined" onclick="setActiveData(4)">Índice de Sequía Combinado</a>
+			<a href="#" id="IMERG" class="active" onclick="setActiveData(this)">IMERG</a>
+			<a href="#" id="CHIRPS" onclick="setActiveData(this)">CHIRPS</a>
+			<a href="#" id="NDVI" onclick="setActiveData(this)">NDVI</a>
+			<a href="#" id="SMAPL3" onclick="setActiveData(this)">SMAP L3</a>
+			<a href="#" id="SMAPL4" onclick="setActiveData(this)">SMAP L4</a>
+			<a href="#" id="GLDAS" onclick="setActiveData(this)">GLDAS</a>
+			<a href="#" id="ESACCI_active" onclick="setActiveData(this)">ESACCI-A</a>
+			<a href="#" id="ESACCI_passive" onclick="setActiveData(this)">ESACCI-P</a>
+			<a href="#" id="ESACCI_combined" onclick="setActiveData(this)">ESACCI-C</a>
 		  </div>
 		</div>
-		 
-		 <input type="month" id="seldate" name="seldate" 
-		  min="2000-01" value="2019-03">
+
+		 <input type="month" onchange="changeDate(this.value);" id="seldate" name="seldate" min="2000-01" value="2018-02">
 		  		  
 		 <canvas id="timeSeriesChart" width="100%"></canvas>
 		 </center>
@@ -207,39 +217,67 @@
 	</div>
 
 	<script>
-		var selData = "Anomalías de Lluvia"
-        var selDept = "Seleccione un departamento";
+		$('document').ready(function(){ 
+			
+			setActiveData(document.getElementById("NDVI")); 
+			
+			});
 		
-		function setActiveData(a){
+		function setActiveData(clicked){
+			selData = clicked.innerHTML;
 			var menu = document.getElementById("setDataMenu");
 			var current = menu.getElementsByClassName("active");
 			current[0].className = ""
-			switch (arguments[0]) {
-				case 1:
-					selData = "Anomalía de Lluvia";
-					document.getElementById("selRain").className = "active";
-					break;
-				
-				case 2:
-					selData = "Anomalía de Humedad";
-					document.getElementById("selMoisture").className = "active";
-					break;
-				
-				case 3:
-					selData = "Anomalía de Vegetación";
-					document.getElementById("selNDVI").className = "active";
-					break;
-								
-				case 4:
-					selData = "Índice Combinado";
-					document.getElementById("selCombined").className = "active";
-					break;
-			}
-				
-			info.update();
-            updateConfigByMutating(mychart);
+			clicked.className = "active";
+			loadData(clicked.id + '_anomaly.csv');	
 		}
+
+		function loadData(fname) {
+		  var xhttp = new XMLHttpRequest();
+		  xhttp.onreadystatechange = function() {
+			  if (this.readyState == 4 && this.status == 200) {
+				  // Parse CSV, dates and dept_ids
+				  anom_data = $.csv.toArrays(this.responseText);
+				  dates = anom_data[0].slice(2,-1);
+				  for (i = 1; i < anom_data.length; i++) {
+					  dept_ids[i-1] = anom_data[i][1];
+				  }
+				  
+				  // Select map and time series data
+				  loadTimeSeries('6147');
+				  loadMapData('2018-2');
+				  info.update();
+			  }};
+		  
+		  xhttp.open("GET", "https://mascondosa.github.io/sequiapp/data/" + fname, true);
+		  xhttp.send();
+		};
+
+		function loadTimeSeries(dept_id){
+			ind = dept_ids.indexOf(dept_id.toString());
+			timeseries_data = anom_data[ind+1].slice(2,-1);
+			updateConfigByMutating(mychart);
+		};
+
+		function loadMapData(date){
+			ind = dates.indexOf(date);
+			for (i = 1; i < anom_data.length; i++) {
+			  map_data[i-1] = anom_data[i][ind];
+			}
+			geojson.resetStyle();	
+		};
+		
+		function changeDate( newDate ){
+			loadMapData(newDate); 
+			setDateLabels();
+			updateConfigByMutating(mychart);
+		}
+		
+		
+		  
+
 	</script>	
+	
 		
 	<script>
 	var mymap = L.map('mapid', 
@@ -352,6 +390,7 @@
 	
 	function selectDepartment(e) {
 		selDept = e.target.properties.nam;
+		loadTimeSeries(e.target.properties.in1);		
 		updateConfigByMutating(mychart);
 	}
 
@@ -372,7 +411,7 @@
 		}).addTo(mymap);
     
     function getDensity ( in1 ){
-        value = Ene18[in1];
+        value = map_data[dept_ids.indexOf(in1.toString())];
         if (typeof value !== 'undefined') {
             return value;
         } else {
@@ -387,20 +426,16 @@
 	<script>
 	const ctx = document.getElementById('timeSeriesChart').getContext('2d');
 
-	const startDate = new Date(2020, 0, 1);
-	const labels = [];
-	for (let i = 0; i < 6; i++) {
-	  const date = moment(startDate).add(i, 'days').format('YYYY-MM-DD');
-	  labels.push(date.toString());
-	}
+	var DateLabels = [];
+	setDateLabels();
 
 	var mychart = new Chart(ctx, {
 	  type: 'line',
 	  data: {
-		labels,
+		labels: DateLabels,
 		datasets: [{
 		  label: selData,
-		  data: [12, 19, 3, 5, 2, 3],
+		  data: timeseries_data,
 		  borderWidth: 1
 		}]
 	  },
@@ -414,9 +449,24 @@
 	
 	function updateConfigByMutating(chart) {
 		chart.options.title.text = selDept;
-        chart.data.datasets[0].data = [50, 20, 12,59,42];
+        chart.data.datasets[0].data = timeseries_data;
         chart.data.datasets[0].label = selData;
+        chart.data.labels = DateLabels;
 		chart.update();
+	};
+	
+	function setDateLabels() {
+		var selDateStr = document.getElementById('seldate').value;
+		var selYear = selDateStr.substring(0,4)
+		var selMonth = selDateStr.substring(5,7)
+		var startDate = new Date(selYear,selMonth,1);
+		DateLabels = [];
+		
+		for (let i = 0; i < 12; i++) {
+		  const date = moment(startDate).add(i, 'months').format('YYYY-MM-DD');
+		  DateLabels.push(date.toString());
+		}
+		
 	};
 	</script>
 	
