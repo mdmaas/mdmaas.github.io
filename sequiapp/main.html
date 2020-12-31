@@ -245,7 +245,8 @@
 				  
 				  // Select map and time series data
 				  loadTimeSeries('6147');
-				  loadMapData('2018-2');
+				  dateStr = document.getElementById('seldate').value;
+				  loadMapData(dateStr);
 				  info.update();
 			  }};
 		  
