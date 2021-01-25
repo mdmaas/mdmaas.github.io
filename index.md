@@ -3,7 +3,7 @@
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
 title: Home
-layout: page
+layout: default
 ---
 
 <img src="images/face2020.jpeg" width=100 height=auto align=center style="float:left; margin-right: 16px;">
