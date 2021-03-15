@@ -21,16 +21,16 @@ layout: default
 
 ## Colaboro con
 
-<p>Applied and Computational Mathematics (<a href="http://www.its.caltech.edu/~obruno/">Caltech</a>)</p>
+- Applied and Computational Mathematics (<a href="http://www.its.caltech.edu/~obruno/">Caltech</a>)
 
-<p>Grupo de Teledetección (<a href="http://www.iafe.uba.ar/wordpress/">IAFE</a>)</p>
+- Grupo de Teledetección (<a href="http://www.iafe.uba.ar/wordpress/">IAFE</a>)
 
-<p>Análisis Numérico (<a href="http://mate.dm.uba.ar/~rduran/research_group/participants.html">DM</a>) </p>
+- Análisis Numérico (<a href="http://mate.dm.uba.ar/~rduran/research_group/participants.html">DM</a>)
 
-<p>Acústica Submarina (Senid) </p>
+- Acústica Submarina (Senid).
 
-<p>Agrometeorología (FAUBA).</p>
+- Agrometeorología (FAUBA).
 
-<p>Centro de Simulación Computacional - Área de Radiofrecuencia (<a href="http://csc.conicet.gov.ar/">CSC</a>)</p>
+- Centro de Simulación Computacional - Área de Radiofrecuencia (<a href="http://csc.conicet.gov.ar/">CSC</a>)
 
 
