@@ -12,7 +12,7 @@ layout: default
 <p> Lugar de trabajo -- Servicio Meteorológico Nacional</p>
 <p style="clear:left;"></p>
 
-## Temas de investigación
+# Temas de investigación
 
 - Métodos numéricos eficientes y de orden alto
 
@@ -21,7 +21,7 @@ layout: default
 - Métodos de aprendizaje automático en teledetección
 
 
-## Colaboro con
+# Colaboro con
 
 - Applied and Computational Mathematics (<a href="http://www.its.caltech.edu/~obruno/">Caltech</a>)
 
