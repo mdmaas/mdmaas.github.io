@@ -5,7 +5,7 @@ permalink: proyectos.html
 ---
 
 - [OSA](https://mdmaas.github.io/OSEE/): Observatorio Satelital Agrometeorológico. 
-Técnicas de machine learning y visualización de datos satelitales.
+Técnicas de aprendizaje automático, procesamiento y visualización de datos satelitales.
 
 - [MateUBA PDE](https://mdmaas.github.io/MateUBA_PDE/). Proyecto de código
 abierto con rutinas de Diferencias Finitas y Elementos Finitos en python, 

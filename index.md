@@ -15,8 +15,11 @@ layout: default
 ## Temas de investigación
 
 - Métodos numéricos eficientes y de orden alto
+
 - Electromagnetismo y acústica computacional en geometrías generales
+
 - Métodos de aprendizaje automático en teledetección
+
 
 ## Colaboro con
 
