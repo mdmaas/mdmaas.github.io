@@ -16,8 +16,7 @@ layout: default
 
 - Métodos numéricos eficientes y de orden alto
 - Electromagnetismo y acústica computacional en geometrías generales
-- Machine Learning en teledetección
-
+- Métodos de aprendizaje automático en teledetección
 
 ## Colaboro con
 
