@@ -16,20 +16,17 @@ layout: default
 
 ## Métodos numéricos eficientes y de orden alto
 
-## Electromagnetismo y acústica computacional en geometrías generales
+## Electromagnetismo y acústica computacional
 
 ## Métodos de aprendizaje automático en teledetección
 
 # Proyectos
 
-## Observatorio Satelital Agrometeorológico. 
+- [OSA](https://mdmaas.github.io/OSEE/). Observatorio Satelital Agrometeorológico. 
+Procesamiento, visualización y aprendizaje automático con datos satelitales. 
 
-Técnicas de aprendizaje automático, procesamiento y visualización de datos satelitales. 
-[ver](https://mdmaas.github.io/OSEE/).
-
-## Diferencias y Elementos Finitos en python
-
-Proyecto de código abierto con fines educativos. [ver](https://mdmaas.github.io/MateUBA_PDE/). 
+- [MateUBA_PDE](https://mdmaas.github.io/MiniFEMLib/). Diferencias y Elementos Finitos en Python,
+con documentación en Jekyll. Proyecto de código abierto con fines educativos. Trabajo en progreso.
 
 # Colaboro con
 
