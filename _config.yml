@@ -16,7 +16,7 @@ minima:
   # generate social links in footer
   social_links:
     twitter: MartinDMaas
-    github:  mascondosa
+    github:  mdmaas
     # devto: jekyll
     # dribbble: jekyll
     # facebook: jekyll
@@ -51,7 +51,6 @@ minima:
 header_pages:
 - index.md
 - blog.md
-- proyectos.md
 - publicaciones.md
 
 markdown: kramdown
