@@ -14,23 +14,22 @@ layout: default
 
 # Temas de investigación
 
-### Métodos numéricos eficientes y de orden alto
+## Métodos numéricos eficientes y de orden alto
 
-### Electromagnetismo y acústica computacional en geometrías generales
+## Electromagnetismo y acústica computacional en geometrías generales
 
-### Métodos de aprendizaje automático en teledetección
+## Métodos de aprendizaje automático en teledetección
 
 # Proyectos
 
-### [OSA](https://mdmaas.github.io/OSEE/): Observatorio Satelital Agrometeorológico. 
+## Observatorio Satelital Agrometeorológico. 
 
+Técnicas de aprendizaje automático, procesamiento y visualización de datos satelitales. 
+[ver](https://mdmaas.github.io/OSEE/).
 
-Técnicas de aprendizaje automático, procesamiento y visualización de datos satelitales.
+## Diferencias y Elementos Finitos en python
 
-### [MateUBA PDE](https://mdmaas.github.io/MateUBA_PDE/). 
-
-Proyecto de código abierto con rutinas de Diferencias Finitas y Elementos Finitos en python, 
-escrito como parte del curso de Análisis Numérico de Exactas-UBA. 
+Proyecto de código abierto con fines educativos. [ver](https://mdmaas.github.io/MateUBA_PDE/). 
 
 # Colaboro con
 
