@@ -14,13 +14,18 @@ layout: default
 
 # Temas de investigación
 
-## Métodos numéricos eficientes y de orden alto
+### Métodos numéricos eficientes y de orden alto
 
-## Electromagnetismo y acústica computacional
+### Electromagnetismo y acústica computacional
 
-## Métodos de aprendizaje automático en teledetección
+### Métodos de aprendizaje automático en teledetección
 
-# Proyectos
+# Publicaciones
+
+<a href="http://scholar.google.com/citations?user=Ovk70UEAAAAJ&hl=es&authuser=1"> 
+<button>Ver en Google Scholar</button>
+
+# Algunos proyectos
 
 - [OSA](https://mdmaas.github.io/OSEE/). Observatorio Satelital Agrometeorológico. 
 Procesamiento, visualización y aprendizaje automático con datos satelitales. 
