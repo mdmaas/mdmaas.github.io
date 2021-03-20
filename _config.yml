@@ -6,6 +6,8 @@ description: > # this means to ignore newlines until "show_excerpts:"
   Página personal de Martín Maas: investigación, proyectos, software, 
   blog, docencia, etc.
 
+google_analytics: G-DCLSVG1X9M
+
 show_excerpts: false # set to true to show excerpts on the homepage
 
 # Minima date format
