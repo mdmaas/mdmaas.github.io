@@ -26,6 +26,9 @@
     footer a:hover{
         text-decoration: none;
     }
+    h2, h3 {
+        padding-bottom: 20px;
+    }
     
     </style>
 </head>
@@ -55,26 +58,96 @@
 
 
 
-<h2>Temas de investigación</h2>
+<h3>Temas de investigación</h3>
 
 <ul>
-    <li>Métodos numéricos eficientes y de orden alto.</li>
-    <li>Electromagnetismo y acústica computacional.</li>
-    <li>Métodos de optimización y aprendizaje automático.</li>
+    <li>Métodos numéricos eficientes, de orden alto, e híbridos asintótico-numéricos.</li>
+    <li>Electromagnetismo computacional.</li>
+    <li>Propagación y dispersión de ondas.</li>
+    <li>Problemas inversos y de diseño óptimo.</li>
 </ul>
 
-<h2>Publicaciones</h2>
+<div class="panel panel-primary" style="margin-bottom:30px; margin-top:30px;">
+    <div class="panel-heading">
+        <h3 class="panel-title" style="font-size:1em;">Oferta de Temas de Tesis de Licenciatura</h3>
+    </div>
+    <div class="panel-body">
+        <p>Si te interesa realizar tu tesis de licenciatura en alguno de los siguientes temas, no dudes en contactarme para más información.</p>
+    </div>
+    <ul>
+    <li>
+        <a data-toggle="collapse" href="#ondasCard" aria-expanded="false" aria-controls="ondasCard">ONDAS.</a> Métodos matemáticos en propagación y dispersión de ondas. (Lic. en Matemática)
+        <div class="collapse" id="ondasCard">
+            <div class="well">
+                Se estudian métodos numéricos de orden alto, así como métodos híbridos numérico-asintóticos para modelar cómo se propagan y dispersan las ondas en distintos medios. Incluye diversas aplicaciones en áreas como acústica, electromagnetismo o sísmica.
+            </div>
+        </div>
+    </li>
+    <li>
+        <a data-toggle="collapse" href="#qbitCard" aria-expanded="false" aria-controls="qbitCard">QBIT.</a> Simulación de dispositivos cuánticos superconductores mediante el método de elementos finitos. (Lic. en Física)
+        <div class="collapse" id="qbitCard">
+            <div class="well">
+                Se implementarán métodos computacionales de elementos finitos, basados en librerías de código abierto (como Palace o EMerge) y librerías de diseño geométrico basadas en Python (GDSFactory, Qiskit) para simular dispositivos como qubits superconductores. Las bases físicas que permiten vincular el dispositivo cuántico con su simulación electromagnética están basados en la teoría del "Energy Participation Ratio" y serán estudiadas en detalle, así como los fundamentos matemáticos del método de elementos finitos.
 
-<a href="http://scholar.google.com/citations?user=Ovk70UEAAAAJ&hl=es&authuser=1"> 
-<button>Ver en Google Scholar</button></a>
+                <p style="padding: 10px 0;">Referencias:</p>
+                <ul>
+                    <li>
+                        <a href="https://www.nature.com/articles/s41534-021-00461-8" target="_blank">
+                            Energy-participation quantization of Josephson circuits
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/awslabs/palace" target="_blank">
+                            Palace
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.emerge-software.com/" target="_blank">
+                            EMerge
+                        </a>
+                    <li>
+                        <a href="https://qiskit-community.github.io/qiskit-metal/tut/4-Analysis/4.02-Eigenmode-and-EPR.html#1.-Analyze-the-transmon-qubit-by-itself" target="_blank">
+                            Qiskit
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://gdsfactory.github.io/gdsfactory/" target="_blank">
+                            GDSFactory
+                        </a>
+                    </li>
+                </ul>
+                
 
-<h1>Proyectos</h1>
+            </div>
+        </div>
+    </li>
+    <li>
+        <a data-toggle="collapse" href="#imagenesCard" aria-expanded="false" aria-controls="imagenesCard">IMAG.</a> Problemas inversos en generación de imágenes sísmicas. (Lic. en Matemática, Física o Ciencia de Datos)
+        <div class="collapse" id="imagenesCard">
+            <div class="well">
+                Se abordan los fundamentos de las técnicas para reconstruir imágenes del subsuelo a partir de datos sísmicos, combinando fundamentos físicos, matemáticos, y computacionales. Se trabajará con datos simulados, haciendo énfasis en la implementación de los métodos estudiados desde primeros principios.
+            </div>
+        </div>
+    </li>
+</ul>
+</div>
+
+
+<h3>Proyectos de transferencia tecnológica</h3>
 
 <ul>
     <li><a href="https://www.epsilonforge.com">Epsilon Forge SAS</a> Empresa de base tecnológica que ofrece servicios de consultoría en simulación electromagnética.</li> 
 </ul>
 
-<h2>Colaboro con</h2>
+
+
+<h3>Publicaciones</h3>
+
+<a href="http://scholar.google.com/citations?user=Ovk70UEAAAAJ&hl=es&authuser=1"> 
+<button>Google Scholar Profile</button></a>
+
+
+<h3>Colaboro con</h3>
 
 <ul>
     <li>Applied and Computational Mathematics (<a href="http://www.its.caltech.edu/~obruno/">Caltech</a>)</li>
